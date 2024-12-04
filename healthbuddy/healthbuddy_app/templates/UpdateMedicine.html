@@ -1,0 +1,54 @@
+{% extends 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <div class="container w-50 mx-auto" style="margin-top: 100px">
+      <div class="shadow card">
+        <div class="card-body">
+          <form action="{% url 'updateMedicineForm' id.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="d-flex justify-content-center logIn loginFont">
+                <h2>Update Medicine</h2>
+              </div>
+              <label for="medicineName" class="ml-1">Medicine</label>
+              <input
+                type="text"
+                name="medicineName"
+                class="form-control ml-1"
+                value="{{ id.medicine_name }}"
+                required
+              />
+              <label class="form-label mt-3 ml-1">Time</label>
+              <input
+                type="time"
+                class="form-control"
+                name="medicineTime"
+                value="{{ medicine_time|date:'H:i' }}"
+                required
+              />
+            </div>
+            <div class="d-flex justify-content-center loginButton">
+              <a
+                href="{% url 'medicineList' %}"
+                type="button"
+                class="btn btn-danger mr-3"
+              >
+                Cancel
+              </a>
+              <button type="submit" class="btnSuccess btn btn-success">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}
+  </body>
+</html>

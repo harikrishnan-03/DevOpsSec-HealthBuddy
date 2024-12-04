@@ -1,0 +1,74 @@
+{% extends 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <div class="container w-50 mx-auto" style="margin-top: 60px">
+      <div class="shadow card">
+        <div class="card-body">
+          <form action="{% url 'updateInsuranceForm' id.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="d-flex justify-content-center logIn loginFont">
+                <h2>Update Health Insurance</h2>
+              </div>
+              <label for="policyName" class="mt-2 ml-2"
+                >Insurance Policy Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                name="policyName"
+                value="{{ id.insurance_policy_name }}"
+                required
+              />
+              <label for="premium" class="mt-2 ml-2"
+                >Premium Amount (in Euro)</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="premium"
+                value="{{ id.insurance_premium }}"
+                required
+              />
+              <label class="form-label mt-3 ml-2">Policy Start Date</label>
+              <input
+                type="date"
+                class="form-control"
+                name="startDate"
+                value="{{ id.insurance_startdt|date:'Y-m-d' }}"
+                required
+              />
+              <label class="form-label mt-3 ml-2">Policy End Date</label>
+              <input
+                type="date"
+                class="form-control"
+                value="{{ id.insurance_enddt|date:'Y-m-d' }}"
+                name="endDate"
+                required
+              />
+            </div>
+            <div class="d-flex justify-content-center loginButton">
+              <a
+                href="{% url 'insuranceList' %}"
+                type="button"
+                class="btn btn-danger mr-3"
+              >
+                Cancel
+              </a>
+              <button type="submit" class="btnSuccess btn btn-success">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}
+  </body>
+</html>

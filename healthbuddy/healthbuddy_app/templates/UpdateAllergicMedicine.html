@@ -1,0 +1,58 @@
+{% extends 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <div class="container w-50 mx-auto" style="margin-top: 100px">
+      <div class="shadow card">
+        <div class="card-body">
+          <form
+            action="{% url 'updateAllergicMedicineForm' id.id %}"
+            method="POST"
+          >
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="d-flex justify-content-center logIn loginFont">
+                <h2>Allergic Medicine</h2>
+              </div>
+              <label for="vaccineName" class="ml-1"
+                >Allergic Medicine Name
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                name="medAllergyName"
+                value="{{ id.med_allergy_name }}"
+                required
+              />
+              <label class="form-label mt-3 ml-1">Description </label>
+              <input
+                type="text"
+                name="medAllergyDescription"
+                value="{{ id.med_allergy_description }}"
+                class="form-control"
+              />
+            </div>
+            <div class="d-flex justify-content-center loginButton">
+              <a
+                href="{% url 'listAllergicMedicine' %}"
+                type="button"
+                class="btn btn-danger mr-3"
+              >
+                Cancel
+              </a>
+              <button type="submit" class="btnSuccess btn btn-success">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}
+  </body>
+</html>

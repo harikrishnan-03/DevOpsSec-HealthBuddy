@@ -1,0 +1,130 @@
+{% extends 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <div class="ml-3">
+      <a href="{% url 'dashboard' %}" type="button" class="mt-3 btnSuccess btn">
+        Back
+      </a>
+      <button
+        type="button"
+        class="mt-3 mr-3 btnSuccess btn flRight"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+      >
+        Add a Vaccine
+      </button>
+      <h2 class="text-center">List of Vaccines</h2>
+    </div>
+
+    <!-- Table for displaying vaccine list -->
+    <div class="shadow card ml-5 mr-5 mt-4 timeCenterCss">
+      <table style="text-align: center" class="table table-hover mt-0 my-0">
+        <thead>
+          <tr>
+            <th scope="col">Sl. No.</th>
+            <th scope="col">Vaccine Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in vaccineList %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.vaccine_name }}</td>
+            <td>{{ i.vaccine_startdt }}</td>
+            <td>{{ i.vaccine_enddt }}</td>
+            <td>
+              <a
+                href="{% url 'updateVaccine' i.id %}"
+                class="btn-success btn"
+                type="button"
+              >
+                Update
+              </a>
+              <a
+                href="{% url 'deleteVaccine' i.id %}"
+                class="btn-danger btn"
+                type="button"
+              >
+                Delete
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal Starting for addding a vaccine -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <a
+              class="btnClose flRight mr-3 mt-0"
+              type="button"
+              data-dismiss="modal"
+            >
+              <img
+                class="logo img-fluid"
+                style="width: 60%; height: 60%"
+                src="{% static 'images/close.png' %}"
+              />
+            </a>
+            <form action="{% url 'addVaccine' %}" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <div class="d-flex justify-content-center logIn loginFont">
+                  <h2>Vaccines</h2>
+                </div>
+                <label for="vaccineName" class="ml-1">Vaccine Name</label>
+                <input
+                  type="text"
+                  class="form-control ml-1"
+                  placeholder="Enter Vaccine Name"
+                  name="vaccineName"
+                  required
+                />
+                <label class="form-label mt-3 ml-1"
+                  >Date on which vaccine is taken
+                </label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="vaccineStart"
+                  required
+                />
+                <label class="form-label mt-3 ml-1">Expiry Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="vaccineEnd"
+                  required
+                />
+              </div>
+              <div class="d-flex justify-content-center loginButton">
+                <button type="submit" class="btnSuccess btn btn-success">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

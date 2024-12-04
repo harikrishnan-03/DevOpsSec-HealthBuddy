@@ -1,0 +1,138 @@
+{% extends 'Index.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <nav class="mb-2 navbar NavbarBody navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="{% url 'dashboard' %}">
+        <img class="logo img-fluid" src="{% static 'images/logo.png' %}" />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-white h6" href="{% url 'dashboard' %}"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white h6" href="{% url 'logOut' %}"
+              >Log Out</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container w-50 mx-auto" style="padding-top: 90px">
+      <div class="shadow card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Profile</h5>
+          {% for filterUser in filterUser %}
+          <form
+            action="{% url 'updateProfileForm' filterUser.id %}"
+            method="POST"
+          >
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1 pt-3">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  value="{{ filterUser.first_name }}"
+                  name="firstName"
+                  required
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label pt-3">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="lName"
+                  value="{{ filterUser.last_name }}"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1 pt-3">Mobile Number</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  name="mobNo"
+                  value="{{ filterUser.mobileNumber }}"
+                  pattern="^\d{9}$"
+                  required
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1 pt-3">Date of Birth</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="dob"
+                  value="{{ filterUser.dob|date:'Y-m-d' }}"
+                  required
+                />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1" for="height"
+                  >Height (in Cm)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  name="height"
+                  value="{{ filterUser.height }}"
+                  required
+                />
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1" for="weight"
+                  >Weight (in Kg)</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  name="weight"
+                  value="{{ filterUser.weight }}"
+                  required
+                />
+              </div>
+            </div>
+            {% endfor %}
+            <div class="d-flex justify-content-center loginButton">
+              <a
+                type="button"
+                class="btn btn-danger mr-3"
+                href="{% url 'dashboard' %}"
+                >Cancel
+              </a>
+              <button class="btnSuccess btn btn-success" type="submit">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,124 @@
+{% extends 'Index.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <nav class="mb-2 navbar NavbarBody navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="{% url 'homePage' %}">
+        <img class="logo img-fluid" src="{% static 'images/logo.png' %}" />
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-white h6" href="{% url 'homePage' %}"
+              >Home</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container w-50 mx-auto">
+      <div class="shadow card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Create an Account</h5>
+          <form action="{% url 'signUp' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1 pt-3" for="validationCustom01"
+                  >First Name</label
+                >
+                {{ form.first_name }}
+                <div>
+                  {% if form.username.errors %}
+                  <div class="pl-1 text-danger">
+                    {% for error in form.username.errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label pt-3" for="lName">Last Name</label>
+                {{ form.last_name }}
+              </div>
+            </div>
+            <label class="form-label ml-1 pt-0" for="InputEmail1">Email</label>
+            {{ form.email }}
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1 pt-3" for="phone"
+                  >Mobile Number</label
+                >
+                {{ form.mobileNumber }}
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1 pt-3">Date of Birth</label>
+                {{ form.dob }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1" for="height"
+                  >Height (in Cm)</label
+                >
+                {{ form.height }}
+              </div>
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1" for="weight"
+                  >Weight (in Kg)</label
+                >
+                {{ form.weight }}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="form-label ml-1">Blood Group </label>
+                {{ form.bloodGroup }}
+              </div>
+              <div class="form-group col-md-6">
+                <div class="form-group">
+                  <label class="form-label ml-1" for="bloodGroup">Gender</label>
+                  {{ form.gender }}
+                </div>
+              </div>
+            </div>
+            <label for="password" class="form-label ml-1 pt-0">Password</label>
+            {{ form.password1 }}
+            <label for="password" class="form-label ml-1 pt-3"
+              >Confirm Password</label
+            >
+            {{ form.password2 }}
+            <div>
+              {% if form.password2.errors %}
+              <div class="text-danger">{{ form.password2.errors }}</div>
+              {% endif %}
+            </div>
+            <div class="d-flex justify-content-center loginButton">
+              <button class="btnSuccess btn btn-success" type="submit">
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

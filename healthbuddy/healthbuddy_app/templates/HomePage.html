@@ -1,0 +1,229 @@
+{% extends 'Index.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <section class="SectionCarousal">
+      <nav class="mb-2 navbar NavbarBody navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{% url 'homePage' %}">
+          <img class="logo img-fluid" src="{% static 'images/logo.png' %}" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link text-white h6" href="{% url 'logIn' %}"
+                >Log In</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white h6" href="#about">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white h6" href="#contact">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="carousalHome mx-auto pt-5">
+        <div
+          id="carouselExampleIndicators"
+          class="carousel slide"
+          data-ride="carousel"
+        >
+          <ol class="carousel-indicators">
+            <li
+              data-target="#carouselExampleIndicators"
+              data-slide-to="0"
+              class="active"
+            ></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                class="d-block w-100"
+                src="{% static 'images/carousal/carousal1.PNG' %}"
+                alt="First slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="{% static 'images/carousal/carousal2.PNG' %}"
+                alt="Second slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="{% static 'images/carousal/carousal3.PNG' %}"
+                alt="Third slide"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                class="d-block w-100"
+                src="{% static 'images/carousal/carousal4.PNG' %}"
+                alt="Third slide"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="sectionAbout mb-5" id="about">
+      <h1 class="pt-5" style="text-align: center">Features</h1>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="shadow card" style="width: 100%; height: 90%">
+              <div class="mx-auto">
+                <img
+                  style="height: 150px"
+                  class="img-fluid card-img-top"
+                  src="{% static 'images/homepage/medicine.gif' %}"
+                  alt="Card Image 1"
+                />
+              </div>
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Record of current medication</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="shadow card" style="width: 100%; height: 90%">
+              <div class="mx-auto">
+                <img
+                  style="height: 150px"
+                  src="{% static 'images/homepage/vaccine.gif' %}"
+                  class="card-img-top"
+                  alt="Card Image 2"
+                />
+              </div>
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Record of vaccines taken</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="shadow card" style="width: 100%; height: 90%">
+              <div class="mx-auto">
+                <img
+                  style="height: 150px"
+                  src="{% static 'images/homepage/insurance.gif' %}"
+                  class="card-img-top"
+                  alt="Card Image 3"
+                />
+              </div>
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Record of health insurance</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="shadow card" style="width: 100%; height: 90%">
+              <div class="mx-auto">
+                <img
+                  style="height: 150px"
+                  class="img-fluid card-img-top"
+                  src="{% static 'images/homepage/lab.gif' %}"
+                  alt="Card Image 1"
+                />
+              </div>
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Record of lab test results</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="shadow card" style="width: 100%; height: 90%">
+              <div class="mx-auto">
+                <img
+                  style="height: 150px"
+                  src="{% static 'images/homepage/allergylist.gif' %}"
+                  class="card-img-top"
+                  alt="Card Image 2"
+                />
+              </div>
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Record history of allergies</h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="shadow card" style="width: 100%; height: 90%">
+              <div class="mx-auto">
+                <img
+                  style="height: 150px"
+                  src="{% static 'images/homepage/medallergy.gif' %}"
+                  class="card-img-top"
+                  alt="Card Image 3"
+                />
+              </div>
+              <div class="card-body mx-auto">
+                <h5 class="card-title">Record list of allergic medicines</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="pt-4 pb-4 SectionContact">
+      <div style="color: white" class="ml-5 mr-5 text-center">
+        <h4 class="text-monospace">
+          About
+          <img
+            style="height: 50px"
+            src="{% static 'images/about.gif' %}"
+            alt="Card Image 3"
+          />
+        </h4>
+        <div class="">
+          <p class="font-weight-normal">
+            Our platform allows you to manage and track your health records with
+            ease, empowering you to take control of your well-being.
+          </p>
+          <p class="font-weight-normal">
+            We are committed to keeping your health information secure, private,
+            and easily accessible.
+          </p>
+          <p class="font-weight-normal">
+            Thank you for trusting us with your health journey.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="text-center p-3">
+        <b> © 2024 Copyright: HealthBuddy </b>
+      </div>
+    </footer>
+    {% endblock %}
+  </body>
+</html>

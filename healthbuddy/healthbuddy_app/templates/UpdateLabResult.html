@@ -1,0 +1,72 @@
+{% extends 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <div class="container w-50 mx-auto" style="margin-top: 100px">
+      <div class="shadow card">
+        <div class="card-body">
+          <form action="{% url 'updateLabResultForm' id.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="d-flex justify-content-center logIn loginFont">
+                <h2>Update Lab Test Results</h2>
+              </div>
+              <label class="ml-1">Lab Test Date </label>
+              <input
+                type="date"
+                class="form-control"
+                name="testDate"
+                value="{{ id.lab_test_date|date:'Y-m-d' }}"
+                required
+              />
+              <label for="vaccineName" class="mt-3 ml-1"
+                >Blood Pressure Test
+              </label>
+              <input
+                type="number"
+                class="form-control"
+                name="pressure"
+                value="{{ id.lab_pressure }}"
+                required
+              />
+              <label class="form-label mt-3 ml-1">Blood Sugar Test </label>
+              <input
+                type="number"
+                class="form-control"
+                name="sugar"
+                value="{{ id.lab_sugar }}"
+                required
+              /><label for="description" class="ml-1 mt-3"
+                >Cholesterol Test</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                name="cholesterol"
+                value="{{ id.lab_Cholesterol }}"
+                required
+              />
+            </div>
+            <div class="d-flex justify-content-center loginButton">
+              <a
+                href="{% url 'listLabResult' %}"
+                type="button"
+                class="btn btn-danger mr-3"
+              >
+                Cancel
+              </a>
+              <button type="submit" class="btnSuccess btn btn-success">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

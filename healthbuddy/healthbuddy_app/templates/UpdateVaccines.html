@@ -1,0 +1,64 @@
+{% extends 'NavBar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+  </head>
+  <body>
+    {% block content %}
+    <div class="container w-50 mx-auto" style="margin-top: 100px">
+      <div class="shadow card">
+        <div class="card-body">
+          <form action="{% url 'updateVaccineForm' id.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <div class="d-flex justify-content-center logIn loginFont">
+                <h2>Update Vaccines</h2>
+              </div>
+              <label for="vaccineName" class="ml-1">Vaccine Name</label>
+              <input
+                type="text"
+                class="form-control ml-1"
+                name="vaccineName"
+                value="{{ id.vaccine_name }}"
+                required
+              />
+              <label class="form-label mt-3 ml-1"
+                >Date on which vaccine is taken
+              </label>
+              <input
+                type="date"
+                class="form-control"
+                name="vaccineStart"
+                value="{{ id.vaccine_startdt|date:'Y-m-d' }}"
+                required
+              />
+              <label class="form-label mt-3 ml-1">Expiry Date</label>
+              <input
+                type="date"
+                class="form-control"
+                name="vaccineEnd"
+                value="{{ id.vaccine_enddt|date:'Y-m-d' }}"
+                required
+              />
+            </div>
+            <div class="d-flex justify-content-center loginButton">
+              <a
+                href="{% url 'vaccineList' %}"
+                type="button"
+                class="btn btn-danger mr-3"
+              >
+                Cancel
+              </a>
+              <button type="submit" class="btnSuccess btn btn-success">
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {% endblock %}
+  </body>
+</html>
