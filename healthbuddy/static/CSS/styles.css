@@ -1,0 +1,99 @@
+body {
+  background-color: #fef9f2;
+}
+.NavbarBody {
+  background-color: #2f86a6;
+}
+.logo {
+  height: 40px;
+}
+.containerDash {
+  padding-top: 90px;
+}
+.containerHome {
+  padding-top: 50px;
+  margin-right: 70px;
+}
+.loginFont {
+  margin-bottom: 30px;
+}
+.loginButton {
+  margin-top: 20px;
+}
+.card {
+  margin-bottom: 20px;
+}
+.description {
+  border: none;
+  color: white;
+  text-align: justify;
+}
+.cardLogin {
+  margin-right: 180px;
+}
+.homeImg {
+  height: 250px;
+  width: 100%;
+  border-radius: 20px;
+}
+.carousalHome {
+  width: 70%;
+}
+.carousel-inner {
+  height: 500px;
+  border-radius: 5px;
+}
+.sectionAbout {
+  color: #2f86a6;
+}
+.labelSignUp {
+  text-align: left;
+}
+.table {
+  background-color: white;
+}
+.slCss {
+  width: 10%;
+}
+.flRight {
+  position: absolute;
+  right: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+.clickHere {
+  float: right;
+}
+.btnSuccess {
+  background-color: #2f86a6;
+  color: white;
+}
+.DashCard {
+  border-radius: 10px;
+}
+.SectionCarousal {
+  background-color: #2f86a6;
+  height: 730px;
+}
+
+.SectionContact {
+  background-color: #2f86a6;
+}
+
+.carousalHome {
+  padding-bottom: 72px;
+  padding-top: 80px;
+}
+footer {
+  background-color: #cccccc;
+  color: black;
+}
+.btnClose {
+  height: 25px;
+  width: 25px;
+}
+.hoverButton:hover {
+  background-color: #2f86a6;
+  color: white;
+}
