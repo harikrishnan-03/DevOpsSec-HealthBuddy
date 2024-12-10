@@ -6,9 +6,9 @@ from django.urls import reverse, NoReverseMatch
 def test_dummy_view(client):
     try:
         # Attempt to reverse the URL
-        url = reverse('homePage')  # Replace 'homepage' with your actual URL name
+        url = reverse('homePage123')  # Replace 'homepage' with your actual URL name
     except NoReverseMatch:
-        pytest.fail("The 'homePage' URL name is not defined. Check your urls.py.")
+        pytest.fail("The 'homePage123' URL name is not defined. Check your urls.py.")
 
     # Make the GET request
     response = client.get(url)
