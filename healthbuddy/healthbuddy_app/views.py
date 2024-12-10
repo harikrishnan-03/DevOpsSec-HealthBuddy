@@ -8,6 +8,7 @@ from .models import *
 def homePage(request):
     return render(request, "HomePage.html")
 
+
 def signUp(request):
     if request.method == "POST":
         form = CustomUserForm(request.POST)
