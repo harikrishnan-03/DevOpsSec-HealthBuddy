@@ -1,11 +1,17 @@
 import pytest
-from django.urls import reverse
+from django.urls import reverse, NoReverseMatch
 
 
 @pytest.mark.django_db
 def test_dummy_view(client):
-    url = reverse("homePage12")  
+  try:
+        # Attempt to reverse the URL
+        url = reverse('homePage')  # Replace 'homepage' with your actual URL name
+    except NoReverseMatch:
+        pytest.fail("The 'homePage' URL name is not defined. Check your urls.py.")
+
+    # Make the GET request
     response = client.get(url)
 
-    # Check that the status code is 200
-    assert response.status_code == 200
+    # Assert the response status code is 200
+    assert response.status_code == 200, "Homepage did not load successfully."
