@@ -4,7 +4,7 @@ from django.urls import reverse, NoReverseMatch
 
 @pytest.mark.django_db
 def test_dummy_view(client):
-  try:
+    try:
         # Attempt to reverse the URL
         url = reverse('homePage')  # Replace 'homepage' with your actual URL name
     except NoReverseMatch:
