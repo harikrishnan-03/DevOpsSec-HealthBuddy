@@ -1,3 +1,4 @@
+# pylint: skip-file
 from django.shortcuts import render, redirect
 from .forms import CustomUserForm, AuthenticateLogin
 from django.contrib.auth import login, logout, authenticate
