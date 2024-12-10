@@ -1,9 +1,11 @@
-import pytest
+from django.test import TestCase
 from django.urls import reverse
 
-
-@pytest.mark.django_db
-def test_dummy_view(client):
-    response = client.get(reverse("homePage"))
-    assert response.status_code == 200
-    assert b"TWelcome to health buddy" in response.content
+class DummyViewTest(TestCase):
+    def test_dummy_view(self):
+        """
+        Test the basic functionality of the homepage.
+        """
+        response = self.client.get(reverse('homePage'))  
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Features")  
