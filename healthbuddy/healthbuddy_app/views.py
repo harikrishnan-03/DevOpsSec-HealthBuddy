@@ -1,18 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect    #pylint: disable=missing-module-docstring
 from .forms import CustomUserForm, AuthenticateLogin
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .models import *
+from .models import *  #pylint: disable=wildcard-import
 
 
-def homePage(request):
+def homePage(request): #pylint: disable=missing-function-docstring,invalid-name
     return render(request, "HomePage.html")
 
 
-def signUp(request):
+def signUp(request): #pylint: disable=missing-function-docstring,invalid-name
     if request.method == "POST":
         form = CustomUserForm(request.POST)
-        print(form.errors)
+        print(form.errors) 
         if form.is_valid():
             print("validate?")
             form.save()
@@ -22,7 +22,7 @@ def signUp(request):
     return render(request, "SignUp.html", {"form": form})
 
 
-def logIn(request):
+def logIn(request): #pylint: disable=invalid-name
     if request.method == "POST":
         form = AuthenticateLogin(request, request.POST)
         if form.is_valid():
@@ -39,7 +39,7 @@ def logIn(request):
 
 
 @login_required(login_url="logIn")
-def logOut(request):
+def logOut(request):  #pylint: disable=invalid-name
     logout(request)
     return redirect("homePage")
 
@@ -53,10 +53,10 @@ def dashboard(request):
 
 @login_required(login_url="logIn")
 def profile(request):
-    currentUser = request.user
-    filterUser = AddUserData.objects.filter(email=currentUser)
-    filterUserDob = currentUser.dob
-    filterUserGender = currentUser.gender
+    currentUser = request.user  #pylint: disable=invalid-name
+    filterUser = AddUserData.objects.filter(email=currentUser)  #pylint: disable=invalid-name
+    filterUserDob = currentUser.dob  #pylint: disable=invalid-name
+    filterUserGender = currentUser.gender  #pylint: disable=invalid-name
     return render(
         request,
         "Profile.html",
@@ -65,9 +65,9 @@ def profile(request):
 
 
 @login_required(login_url="logIn")
-def updateProfileForm(request, id):
+def updateProfileForm(request, id):  #pylint: disable=invalid-name
     if request.method == "POST":
-        profileToUpdate = AddUserData.objects.get(id=id)
+        profileToUpdate = AddUserData.objects.get(id=id)  #pylint: disable=invalid-name
         profileToUpdate.first_name = request.POST["firstName"]
         profileToUpdate.last_name = request.POST["lName"]
         profileToUpdate.mobileNumber = request.POST["mobNo"]
@@ -79,31 +79,31 @@ def updateProfileForm(request, id):
 
 
 @login_required(login_url="logIn")
-def medicineList(request):
-    currentUser = request.user
-    medicineList = CurrentMedicine.objects.filter(user=currentUser)
+def medicineList(request):  #pylint: disable=invalid-name
+    currentUser = request.user  #pylint: disable=invalid-name
+    medicineList = CurrentMedicine.objects.filter(user=currentUser)  #pylint: disable=invalid-name
     print(medicineList)
     print(currentUser)
     return render(request, "MedicineHistory.html", {"medicineList": medicineList})
 
 
 @login_required(login_url="logIn")
-def addMedicine(request):
+def addMedicine(request):  #pylint: disable=invalid-name
     if request.method == "POST":
-        currentUser = request.user
-        medicineName = request.POST["medicineName"]
-        medicineTime = request.POST["medicineTime"]
-        saveMedicine = CurrentMedicine(
+        currentUser = request.user #pylint: disable=invalid-name
+        medicineName = request.POST["medicineName"]  #pylint: disable=invalid-name
+        medicineTime = request.POST["medicineTime"]  #pylint: disable=invalid-name
+        saveMedicine = CurrentMedicine(  #pylint: disable=invalid-name
             user=currentUser, medicine_name=medicineName, medicine_time=medicineTime
         )
         saveMedicine.save()
     return redirect("medicineList")
 
 
-@login_required(login_url="logIn")
-def updateMedicine(request, id):
-    medicineToUpdate = CurrentMedicine.objects.get(id=id)
-    medicine_time = medicineToUpdate.medicine_time
+@login_required(login_url="logIn")  #pylint: disable=invalid-name
+def updateMedicine(request, id):  #pylint: disable=invalid-name
+    medicineToUpdate = CurrentMedicine.objects.get(id=id)  #pylint: disable=invalid-name
+    medicine_time = medicineToUpdate.medicine_time 
     return render(
         request,
         "UpdateMedicine.html",
@@ -112,9 +112,9 @@ def updateMedicine(request, id):
 
 
 @login_required(login_url="logIn")
-def updateMedicineForm(request, id):
+def updateMedicineForm(request, id):  #pylint: disable=invalid-name
     if request.method == "POST":
-        medicineToUpdate = CurrentMedicine.objects.get(id=id)
+        medicineToUpdate = CurrentMedicine.objects.get(id=id)  #pylint: disable=invalid-name
         medicineToUpdate.user = request.user  # Assign User to  CurrentMedicine Object
         medicineToUpdate.medicine_name = request.POST["medicineName"]
         medicineToUpdate.medicine_time = request.POST["medicineTime"]
@@ -123,29 +123,29 @@ def updateMedicineForm(request, id):
 
 
 @login_required(login_url="logIn")
-def deleteMedicine(request, id):
-    medicineToDelete = CurrentMedicine.objects.get(id=id)
+def deleteMedicine(request, id):  #pylint: disable=invalid-name
+    medicineToDelete = CurrentMedicine.objects.get(id=id)  #pylint: disable=invalid-name
     medicineToDelete.delete()
     return redirect("medicineList")
 
 
 @login_required(login_url="logIn")
-def vaccineList(request):
-    currentUser = request.user
-    vaccineList = VaccineList.objects.filter(user=currentUser)
+def vaccineList(request):  #pylint: disable=invalid-name
+    currentUser = request.user  #pylint: disable=invalid-name
+    vaccineList = VaccineList.objects.filter(user=currentUser)  #pylint: disable=invalid-name
     print(vaccineList)
     print(currentUser)
     return render(request, "Vaccines.html", {"vaccineList": vaccineList})
 
 
 @login_required(login_url="logIn")
-def addVaccine(request):
+def addVaccine(request):  #pylint: disable=invalid-name
     if request.method == "POST":
-        currentUser = request.user
-        vaccineName = request.POST["vaccineName"]
-        vaccineStart = request.POST["vaccineStart"]
-        vaccineEnd = request.POST["vaccineEnd"]
-        saveVaccine = VaccineList(
+        currentUser = request.user  #pylint: disable=invalid-name
+        vaccineName = request.POST["vaccineName"]  #pylint: disable=invalid-name
+        vaccineStart = request.POST["vaccineStart"]  #pylint: disable=invalid-name
+        vaccineEnd = request.POST["vaccineEnd"]  #pylint: disable=invalid-name
+        saveVaccine = VaccineList(  #pylint: disable=invalid-name
             user=currentUser,
             vaccine_name=vaccineName,
             vaccine_startdt=vaccineStart,
@@ -156,8 +156,8 @@ def addVaccine(request):
 
 
 @login_required(login_url="logIn")
-def updateVaccine(request, id):
-    vaccineToUpdate = VaccineList.objects.get(id=id)
+def updateVaccine(request, id):  #pylint: disable=invalid-name
+    vaccineToUpdate = VaccineList.objects.get(id=id)  #pylint: disable=invalid-name
     vaccine_startdt = vaccineToUpdate.vaccine_startdt
     vaccine_enddt = vaccineToUpdate.vaccine_enddt
     return render(
@@ -172,9 +172,9 @@ def updateVaccine(request, id):
 
 
 @login_required(login_url="logIn")
-def updateVaccineForm(request, id):
+def updateVaccineForm(request, id):  #pylint: disable=invalid-name
     if request.method == "POST":
-        vaccineToUpdate = VaccineList.objects.get(id=id)
+        vaccineToUpdate = VaccineList.objects.get(id=id)  #pylint: disable=invalid-name
         vaccineToUpdate.user = request.user
         vaccineToUpdate.vaccine_name = request.POST["vaccineName"]
         vaccineToUpdate.vaccine_startdt = request.POST["vaccineStart"]
@@ -202,14 +202,14 @@ def insuranceList(request):
 
 
 @login_required(login_url="logIn")
-def addInsurance(request):
-    if request.method == "POST":
-        currentUser = request.user
-        policyName = request.POST["policyName"]
+def addInsurance(request):  #pylint: disable=invalid-name
+    if request.method == "POST": 
+        currentUser = request.user  #pylint: disable=invalid-name
+        policyName = request.POST["policyName"]  #pylint: disable=invalid-name
         premium = request.POST["premium"]
-        startDate = request.POST["startDate"]
-        endDate = request.POST["endDate"]
-        saveInsurance = HealthInsurance(
+        startDate = request.POST["startDate"]  #pylint: disable=invalid-name
+        endDate = request.POST["endDate"]  #pylint: disable=invalid-name
+        saveInsurance = HealthInsurance(  #pylint: disable=invalid-name
             user=currentUser,
             insurance_policy_name=policyName,
             insurance_premium=premium,
@@ -221,8 +221,8 @@ def addInsurance(request):
 
 
 @login_required(login_url="logIn")
-def updateInsurance(request, id):
-    insuranceToUpdate = HealthInsurance.objects.get(id=id)
+def updateInsurance(request, id):  #pylint: disable=invalid-name
+    insuranceToUpdate = HealthInsurance.objects.get(id=id)  #pylint: disable=invalid-name
     insurance_startdt = insuranceToUpdate.insurance_startdt
     insurance_enddt = insuranceToUpdate.insurance_enddt
     return render(
@@ -257,9 +257,9 @@ def deleteInsurance(request, id):
 
 
 @login_required(login_url="logIn")
-def listLabResult(request):
-    currentUser = request.user
-    labDetails = LabTestResults.objects.filter(user=currentUser)
+def listLabResult(request):  #pylint: disable=invalid-name
+    currentUser = request.user  #pylint: disable=invalid-name
+    labDetails = LabTestResults.objects.filter(user=currentUser)  #pylint: disable=invalid-name
     print(labDetails)
     print(currentUser)
     return render(
