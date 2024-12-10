@@ -8,6 +8,8 @@ from .models import *
 def homePage(request):
     return render(request, "HomePage.html")
 
+def unitTesting(request):
+    return HttpResponse(f"Testing Done")
 
 def signUp(request):
     if request.method == "POST":
