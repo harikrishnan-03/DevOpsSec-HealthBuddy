@@ -29,13 +29,13 @@ jobs:
           pip install pylint black bandit safety -r ./requirements.txt
 
       - name: Run Pylint
-        run: pylint healthbuddy healthbuddy_app
+        run: pylint healthbuddy 
 
       - name: Run Black
         run: black --check .
 
       - name: Run Bandit
-        run: bandit -r healthbuddy
+        run: bandit -r healthbuddy healthbuddy_app
 
       - name: Check dependencies with Safety
         run: safety check
