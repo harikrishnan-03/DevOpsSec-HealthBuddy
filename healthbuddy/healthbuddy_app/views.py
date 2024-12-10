@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *  #pylint: disable=wildcard-import
 
 
-def homePage(request): #pylint: disable=missing-function-docstring,invalid-name
+def homePage(request): #pylint: disable=missing-function-docstring,invalid-name, trailing-whitespace, redefined-outer-name, no-member, redefined-builtin
     return render(request, "HomePage.html")
 
 
